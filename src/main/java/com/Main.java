@@ -2,7 +2,6 @@ package com;
 
 import org.jline.keymap.KeyMap;
 import org.jline.reader.*;
-import org.jline.terminal.Size;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
@@ -13,9 +12,7 @@ public class Main {
         Terminal terminal = null;
         try {
             terminal = TerminalBuilder.builder()
-                    .system(false)
-                    .streams(System.in, System.out)
-                    .size(new Size(80, 80))
+                    .system(true)
                     .build();
         } catch (IOException e) {
             e.printStackTrace();
@@ -23,12 +20,13 @@ public class Main {
         LineReader reader = LineReaderBuilder.builder()
                 .terminal(terminal)
                 .build();
+
         MyWidgets myWidgets = new MyWidgets(reader);
         KeyMap<Binding> keyMap = reader.getKeyMaps().get("main");
         keyMap.bind(new Reference("_plus7"), "k");
 
         while (true) {
-            reader.readLine("", "", (MaskingCallback) null, null);
+            reader.readLine();
         }
     }
 
