@@ -49,6 +49,9 @@ class MyWidgets extends org.jline.builtins.Widgets {
             callWidget(LineReader.REDRAW_LINE);
         } catch (NumberFormatException e) {
             e.printStackTrace();
+            buffer().clear();
+            buffer().write("1");
+            callWidget(LineReader.REDRAW_LINE);
         }
         return true;
     }
